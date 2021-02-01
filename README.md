@@ -1,5 +1,5 @@
 # filewcount
-Flask pyhon uwsgi docker widget
+Flask python uwsgi docker widget
 -------------------
 Usage:
 
