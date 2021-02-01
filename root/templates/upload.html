@@ -1,0 +1,51 @@
+<!-- {% extends "master.html" %} -->
+{% block content %}
+<!-- Banner -->
+	<div class="banner">
+	  <div class="container">
+	  <h1>File Upload</h1>
+	  </div>
+	  <div class="contact-arrow"></div>
+	</div>
+	  <!-- End Banner -->
+  	<!-- Gray Bg -->
+	<div class="gray-bg">
+	<!-- Container -->
+	<div class="container">
+	<!-- Center Container -->
+	<div class="center-container">
+	<div class="contact-form">
+<form action="{{ basePath }}/file_upload" method="post" enctype="multipart/form-data">
+
+{% if errors %}
+  {% for error in errors %}
+    <p class="bg-danger">{{ error }}</p>
+  {% endfor %}
+{% endif %}
+
+
+<div class="alert alert-warning">
+<label>Notice</label>
+
+{% if output_text %}
+	<p>{{ output_text }}</p>
+{% else %}
+    <p>File Word Counter. Upload if you dare.</p>
+{% endif %}
+</div>
+	<div class="form-group">
+		<label for="new_file">Go ahead. Submit a Text File</label>
+		<input type="file" id="new_file" name="new_file">
+		<input type="submit" value="Submit" class="button submit-button">
+	</div>
+</form>
+</div>
+
+	</div>
+	</div>
+	<!-- End Center Container -->
+	</div>
+	<!-- End Container -->
+	</div>
+	<!-- End Gray Bg -->
+{% endblock %}
