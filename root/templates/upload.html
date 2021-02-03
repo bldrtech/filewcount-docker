@@ -42,6 +42,13 @@
 </div>
 
 	</div>
+	{% if files_list %}
+		<h4>Files Previously Uploaded</h4>
+		<h5>Format: YYYYMMDD.HHmmss-#count-#uniq.txt</h5>
+		{% for file_name in files_list %}
+		<p>{{file_name}}</p>
+		{% endfor %}
+	{% endif %}
 	</div>
 	<!-- End Center Container -->
 	</div>

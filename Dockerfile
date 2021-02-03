@@ -13,9 +13,9 @@ RUN apt-get update \
 
 COPY / /staging/
 
-RUN pip3 install wheel==0.30.0
-RUN pip3 install -r /staging/requirements.txt
-RUN pip3 install uwsgi==2.0.16
+RUN pip3 install wheel \
+    && pip3 install -r /staging/requirements.txt  \
+    && pip3 install uwsgi
 
 RUN mkdir -p /usr/share/uwsgi/conf/ \
     && mkdir -p /etc/uwsgi/apps-enabled/ \

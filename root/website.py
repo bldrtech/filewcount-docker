@@ -1,5 +1,7 @@
 import re
 import collections
+import glob
+from datetime import datetime
 
 from flask import Flask, request, redirect, url_for, send_from_directory, render_template
 from flask.views import MethodView
@@ -35,12 +37,19 @@ class Upload(MethodView):
                     output_text = "File Received... But it was empty. Word Count:{}, Uniq-Word Count:{}".format(words_count, key_count)
                 else:
                     output_text = "File Received. Thanks! Word Count:{}, Uniq-Word Count:{}".format(words_count, key_count)
+                now = datetime.utcnow()
+                file_name = "{0:%Y}{0:%m}{0:%d}.{0:%H}{0:%M}{0:%S}-{1}-{2}.txt".format(now, words_count, key_count)
+                file_path = uploadsPath + '/' + file_name
+                with open(file_path, 'wb') as output_file:
+                    output_file.write(new_file)
+                all_file_match = uploadsPath + "/*.txt"
+                files_list = glob.glob(all_file_match)
             except:
                 errors.append("Problem parsing uploaded file. Is it TEXT?")
         else:
             errors.append("Missing File")
-        if not errors and output_text is not None:
-            return render_template("upload.html", title='File Received', output_text=output_text, basePath=basePath)
+        if not errors and output_text is not None and files_list is not None:
+            return render_template("upload.html", title='File Received', output_text=output_text, files_list=files_list, basePath=basePath)
         else:
             return render_template("upload.html", title='File Upload', errors=errors, basePath=basePath)
 
